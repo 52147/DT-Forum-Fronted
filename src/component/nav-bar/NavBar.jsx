@@ -20,7 +20,7 @@ export const NavBar = () => {
           <button className="w-[73px] h-[24px] shrink-0 font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] border-none tracking-0.27px relative z-[35] pointer" />
           <button className="w-[76px] h-[24px] shrink-0 font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] border-none tracking-0.27px relative z-[36] pointer" />
           <button className="w-[54px] h-[24px] shrink-0 font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] border-none tracking-0.27px relative z-[37] pointer" />
-          <button className="flex w-[63px] pt-[6px] pr-[10px] pb-[6px] pl-[10px] gap-[10px] items-start shrink-0 flex-nowrap bg-[#fff] rounded-[5px] border-solid border border-[#000] relative z-[38] pointer">
+          <button className="flex w-[63px] pt-[6px] pr-[10px] pb-[6px] pl-[10px] gap-[10px] items-start shrink-0 flex-nowrap bg-[#fff] rounded-[5px] border-solid border border-[#000] relative z-[38] pointer button-login">
             <span className="flex w-[43px] h-[25px] justify-center items-start shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-center whitespace-nowrap z-[39]">
               Log in
             </span>

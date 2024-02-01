@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import { Button } from 'react-bootstrap';
+
 export const Topic = () => {
   return (
     <>

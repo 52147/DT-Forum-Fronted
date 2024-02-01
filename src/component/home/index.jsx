@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import { Slider } from "./Slider";
 import { Topic } from "./Topic";
 
 export const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const toggleDropdown = () => {
+    // Log the current state before toggling
+    console.log("Dropdown button was clicked, current state:", isOpen);
+    setIsOpen(!isOpen); // Toggle the state
+  };
+  const toggleDropdown2 = () => {
+    // Log the current state before toggling
+    console.log("Dropdown button was clicked, current state:", isOpen2);
+    setIsOpen2(!isOpen2); // Toggle the state
+  };
+
+  console.log("Dropdown content should be:", isOpen ? "visible" : "hidden");
   return (
     <div className="main-container w-[1440px] h-[2867px] bg-[#fff] relative mx-auto my-0">
       <Slider />
@@ -15,52 +29,14 @@ export const Home = () => {
           Back to top
         </span>
       </button>
-      <div className="w-[1441px] h-[216px] bg-[#4c4c4d] relative mt-[57px] mr-0 mb-0 ml-0">
-        <div className="flex w-[228px] flex-col gap-[10px] items-start flex-nowrap relative z-[4] mt-[60.5px] mr-0 mb-0 ml-[80px]">
-          <div className="flex w-[125px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[5]">
-            <div className="w-[24px] h-[24px] shrink-0 relative z-[6]">
-              <div className="w-[13.984px] h-[14.007px] bg-[url(../../assets/images/77fc8fa8-470d-4c6a-9894-c35cbcee8369.png)] bg-[length:100%_100%] bg-no-repeat relative z-[7] mt-[5px] mr-0 mb-0 ml-[5px]" />
-            </div>
-            <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#fff] relative text-left whitespace-nowrap z-[8]">
-              1-714-889-225
-            </span>
-          </div>
-          <div className="flex w-[202px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[9]">
-            <div className="w-[24px] h-[24px] shrink-0 relative z-10">
-              <div className="w-[15px] h-[14.005px] bg-[url(../../assets/images/c77479c0-b54a-4b9c-938d-cb5f455db04e.png)] bg-[length:100%_100%] bg-no-repeat relative z-[11] mt-[5px] mr-0 mb-0 ml-[5px]" />
-            </div>
-            <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#fff] relative text-left whitespace-nowrap z-[12]">
-              diamondtofu@gmail.com
-            </span>
-          </div>
-          <div className="flex w-[228px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[13]">
-            <div className="w-[24px] h-[24px] shrink-0 relative z-[14]">
-              <div className="w-[11.999px] h-[13.999px] bg-[url(../../assets/images/d1c5f039-3de3-480b-8919-392279cbcd77.png)] bg-[length:100%_100%] bg-no-repeat relative z-[15] mt-[5px] mr-0 mb-0 ml-[6px]" />
-            </div>
-            <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#fff] relative text-left whitespace-nowrap z-[16]">
-              1 Leighton St, Cambridge, MA
-            </span>
-          </div>
-        </div>
-        <div className="flex w-[314.963px] gap-[14px] items-center flex-nowrap relative z-[1] mt-[4.5px] mr-0 mb-0 ml-[1126.037px]">
-          <div className="w-[32.963px] h-[30px] shrink-0 bg-[url(../../assets/images/a850eb20-8c5a-4d68-96f3-f63c61781e40.png)] bg-cover bg-no-repeat relative z-[2]" />
-          <div className="w-[268px] shrink-0 font-['Comfortaa'] text-[22px] font-normal leading-[29px] relative text-left whitespace-nowrap z-[3]">
-            <span className="font-['Futura'] text-[22px] font-medium leading-[26.4px] text-[#fff] relative text-left">
-              DIAMOND
-            </span>
-            <span className="font-['Comfortaa'] text-[22px] font-normal leading-[26.4px] text-[#fff] relative text-left">
-              Tofu
-            </span>
-          </div>
-        </div>
-      </div>
+
       <Topic />
       <span className="flex h-[36px] justify-start items-start font-['Barlow'] text-[24px] font-medium leading-[36px] text-[#000] tracking--0.36px absolute top-[503px] left-[260px] text-left whitespace-nowrap z-[47]">
         Discussions
       </span>
-      <button className="flex w-[179px] h-[36px] pt-[6px] pr-[15px] pb-[6px] pl-[15px] gap-[5px] items-center flex-nowrap bg-[#000] rounded-[22px] border-none absolute top-[557px] left-[1161px] z-[341] pointer">
+      <button className="flex w-[179px] h-[36px] pt-[6px] pr-[15px] pb-[6px] pl-[15px] gap-[5px] items-center flex-nowrap bg-[#000] rounded-[22px] border-none absolute top-[557px] left-[1161px] z-[341] pointer button-start-post">
         <div className="w-[24px] h-[24px] shrink-0 relative overflow-hidden z-[342]">
-          <div className="w-[16px] h-[16px] bg-[url(../../assets/images/fe136d28-a7c4-4605-b5a1-5eacf3d2ee37.png)] bg-[length:100%_100%] bg-no-repeat relative z-[343] mt-[4px] mr-0 mb-0 ml-[4px]" />
+          <div className="cross-icon w-[16px] h-[16px] bg-[url(../../assets/images/fe136d28-a7c4-4605-b5a1-5eacf3d2ee37.png)] bg-[length:100%_100%] bg-no-repeat relative z-[343] mt-[4px] mr-0 mb-0 ml-[4px]" />
         </div>
         <span className="flex w-[120px] h-[24px] justify-center items-start shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#fff] tracking-0.27px relative text-center whitespace-nowrap z-[344]">
           Start your post
@@ -82,22 +58,39 @@ export const Home = () => {
             Most liked
           </span>
         </div>
-        <button className="flex w-[111px] pt-[6px] pr-[10px] pb-[6px] pl-[10px] gap-[5px] items-center shrink-0 flex-nowrap bg-[#fff] rounded-[5px] border-solid border border-[#000] relative z-[329] pointer">
-          <span className="flex w-[62px] h-[25px] justify-center items-start shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-center whitespace-nowrap z-[330]">
+
+        <div className="dropdown-container">
+          <button className="dropdown-button" onClick={toggleDropdown}>
             Location
-          </span>
-          <div className="w-[24px] h-[24px] shrink-0 relative z-[331]">
-            <div className="w-[16px] h-[8.207px] bg-[url(../../assets/images/7f918e6c-e15a-4200-9a13-32619d518c04.png)] bg-[length:100%_100%] bg-no-repeat relative z-[332] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-          </div>
-        </button>
-        <div className="flex w-[84px] pt-[6px] pr-[10px] pb-[6px] pl-[10px] gap-[5px] items-center shrink-0 flex-nowrap bg-[#fff] rounded-[5px] border-solid border border-[#000] relative z-[333]">
-          <span className="flex w-[35px] h-[25px] justify-center items-start shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-center whitespace-nowrap z-[334]">
-            More
-          </span>
-          <div className="w-[24px] h-[24px] shrink-0 relative z-[335]">
-            <div className="w-[16px] h-[8.207px] bg-[url(../../assets/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-          </div>
+            <div className="w-[24px] h-[24px] shrink-0 relative z-[335]">
+              <div className="w-[16px] h-[8.207px] bg-[url(../../assets/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
+            </div>{" "}
+          </button>
+          {isOpen && (
+            <div className="dropdown-content" key="dropdownContent">
+              <div className="dropdown-item">Option 1</div>
+              <div className="dropdown-item">Option 2</div>
+              <div className="dropdown-item">Option 3</div>
+            </div>
+          )}
         </div>
+
+        <div className="dropdown-container">
+          <button className="dropdown-button" onClick={toggleDropdown2}>
+            More
+            <div className="w-[24px] h-[24px] shrink-0 relative z-[335]">
+              <div className="w-[16px] h-[8.207px] bg-[url(../../assets/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
+            </div>{" "}
+          </button>
+          {isOpen2 && (
+            <div className="dropdown-content" key="dropdownContent">
+              <div className="dropdown-item">Option 1</div>
+              <div className="dropdown-item">Option 2</div>
+              <div className="dropdown-item">Option 3</div>
+            </div>
+          )}
+        </div>
+
         <div className="flex w-[316px] pt-[6px] pr-[13px] pb-[6px] pl-[13px] gap-[10px] items-center shrink-0 flex-nowrap rounded-[5px] border-solid border border-[#000] relative z-[337]">
           <div className="w-[24px] h-[24px] shrink-0 relative z-[338]">
             <div className="w-[14px] h-[14.001px] bg-[url(../../assets/images/92fe01d7-045c-4214-a8f6-c4734d5a6025.png)] bg-[length:100%_100%] bg-no-repeat relative z-[339] mt-[5px] mr-0 mb-0 ml-[5px]" />
@@ -109,7 +102,7 @@ export const Home = () => {
       </div>
 
       <div className="flex w-[1100px] h-[1877.845px] flex-col gap-[10px] items-start flex-nowrap absolute top-[620px] left-[260px] z-[48]">
-        <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/565aa5cd-7256-430a-95ea-542860a82caf.png)] bg-cover bg-no-repeat relative z-[49]" />
+        {/* <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/565aa5cd-7256-430a-95ea-542860a82caf.png)] bg-cover bg-no-repeat relative z-[49]" />
         <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-50">
           <div className="flex w-[1140px] gap-[50px] items-center shrink-0 flex-nowrap relative z-[51]">
             <div className="flex w-[600px] flex-col gap-[5px] items-start shrink-0 flex-nowrap relative z-[52]">
@@ -183,13 +176,13 @@ export const Home = () => {
             <div className="w-[272.922px] h-[272.922px] shrink-0 bg-[rgba(196,196,196,0.2)] bg-[url(../../assets/images/400d95010a9b3469b64e5fb10a05a6a3e0e4bac9.png)] bg-cover bg-no-repeat rounded-[5px] relative z-[83]" />
             <div className="w-[272.922px] h-[272.922px] shrink-0 bg-[rgba(255,255,255,0.2)] bg-[url(../../assets/images/7e514397b6281205dce094a1936b0e543b6d4e4f.png)] bg-cover bg-no-repeat rounded-[5px] relative z-[84]" />
           </div>
-        </div>
+        </div> */}
         <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/268305b8-eaf2-4abd-82f3-feef2ebc6ebc.png)] bg-cover bg-no-repeat relative z-[85]" />
         <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-[86]">
           <div className="flex w-[1140px] gap-[50px] items-center shrink-0 flex-nowrap relative z-[87]">
             <div className="flex w-[600px] flex-col gap-[5px] items-start shrink-0 flex-nowrap relative z-[88]">
               <span className="h-[30px] self-stretch shrink-0 basis-auto font-['Barlow'] text-[20px] font-medium leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[89]">
-                Lorem ipsum dfsoj sdfi
+                Article Name
               </span>
               <span className="h-[25px] self-stretch shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[rgba(0,0,0,0.8)] relative text-left whitespace-nowrap z-[90]">
                 Post preview - Nemo enim ipsam voluptatem quia voluptas sit sdfj
@@ -201,18 +194,19 @@ export const Home = () => {
                   <div className="w-[14.003px] h-[12.02px] bg-[url(../../assets/images/cad88275-378d-4fe5-b71d-b567d605ae25.png)] bg-[length:100%_100%] bg-no-repeat relative z-[94] mt-[6px] mr-0 mb-0 ml-[5px]" />
                 </div>
                 <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-left whitespace-nowrap z-[95]">
-                  Learning
+                  Topics
                 </span>
               </div>
               <div className="flex w-[100px] gap-[2px] items-end shrink-0 flex-nowrap relative z-[96]">
                 <div className="w-[24px] h-[24px] shrink-0 relative z-[97]">
                   <div className="w-[11px] h-[13.951px] bg-[url(../../assets/images/e864e600-8246-4452-915f-48e34c0bb093.png)] bg-[length:100%_100%] bg-no-repeat relative z-[98] mt-[5px] mr-0 mb-0 ml-[6.5px]" />
                 </div>
+                Author
                 <button className="w-[47px] h-[25px] shrink-0 font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] border-none relative z-[99] pointer" />
               </div>
               <button className="flex w-[100px] gap-[2px] items-end shrink-0 flex-nowrap border-none relative z-[100] pointer">
                 <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-left whitespace-nowrap z-[101]">
-                  06-30-2023
+                  Date
                 </span>
               </button>
               <div className="flex w-[100px] gap-[2px] items-end shrink-0 flex-nowrap relative z-[102]">
@@ -226,22 +220,22 @@ export const Home = () => {
           <div className="flex w-[337px] gap-[15px] items-start shrink-0 flex-nowrap relative z-[106]">
             <button className="flex w-[135px] h-[37px] pt-[8px] pr-[15px] pb-[8px] pl-[15px] gap-[5px] items-center shrink-0 flex-nowrap bg-[rgba(220,228,244,0.5)] rounded-[18px] border-none relative z-[107] pointer">
               <span className="flex w-[105px] h-[25px] justify-center items-center shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#2d477a] relative text-center whitespace-nowrap z-[108]">
-                Travel Wedding
+                keyword1
               </span>
             </button>
             <button className="flex w-[89px] h-[37px] pt-[8px] pr-[15px] pb-[8px] pl-[15px] gap-[5px] items-center shrink-0 flex-nowrap bg-[rgba(220,228,244,0.5)] rounded-[18px] border-none relative z-[109] pointer">
               <span className="flex w-[59px] h-[25px] justify-center items-center shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#2d477a] relative text-center whitespace-nowrap z-[110]">
-                Lifestyle
+                keyword2
               </span>
             </button>
             <button className="flex w-[83px] h-[37px] pt-[8px] pr-[15px] pb-[8px] pl-[15px] gap-[5px] items-center shrink-0 flex-nowrap bg-[rgba(220,228,244,0.5)] rounded-[18px] border-none relative z-[111] pointer">
               <span className="flex w-[53px] h-[25px] justify-center items-center shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#2d477a] relative text-center whitespace-nowrap z-[112]">
-                Clothes
+                keyword3
               </span>
             </button>
           </div>
         </div>
-        <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/43d8108a-e496-4483-930e-21dc708ce84c.png)] bg-cover bg-no-repeat relative z-[113]" />
+        {/* <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/43d8108a-e496-4483-930e-21dc708ce84c.png)] bg-cover bg-no-repeat relative z-[113]" />
         <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-[114]">
           <div className="flex w-[1140px] gap-[50px] items-center shrink-0 flex-nowrap relative z-[115]">
             <div className="flex w-[600px] flex-col gap-[5px] items-start shrink-0 flex-nowrap relative z-[116]">
@@ -651,6 +645,7 @@ export const Home = () => {
             </button>
           </div>
         </div>
+         */}
         <div className="w-[1020px] shrink-0 bg-[url(../../assets/images/97522f7d-bc18-4447-8223-d671cab53ed4.png)] bg-cover bg-no-repeat relative z-[317]" />
         <div className="flex w-[118px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[318]">
           <div className="w-[24px] h-[24px] shrink-0 relative z-[319]">
