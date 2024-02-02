@@ -6,7 +6,7 @@ export const NavBar = () => {
     <div>
       <div className="flex w-[1440px] h-[100px] pt-0 pr-[80px] pb-0 pl-[80px] justify-between items-center flex-nowrap relative z-30 mt-0 mr-0 mb-0 ml-0">
         <div className="flex w-[327.951px] gap-[16px] items-center shrink-0 flex-nowrap relative z-[31]">
-          <div className="w-[43.951px] h-[40px] shrink-0 bg-[url(../../assets/images/c4a7d923-87b1-407b-bd44-deb99e0a1c4a.png)] bg-cover bg-no-repeat relative z-[32]" />
+          <div className="w-[43.951px] h-[40px] shrink-0 bg-[url(public/images/c4a7d923-87b1-407b-bd44-deb99e0a1c4a.png)] bg-cover bg-no-repeat relative z-[32]" />
           <div className="w-[268px] shrink-0 font-['Comfortaa'] text-[28px] font-normal leading-[37px] relative text-left whitespace-nowrap z-[33]">
             <span className="font-['Futura'] text-[28px] font-medium leading-[33.6px] text-[#000] relative text-left">
               DIAMOND
