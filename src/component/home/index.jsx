@@ -3,7 +3,7 @@ import "./index.css";
 import { Slider } from "./Slider";
 import { Topic } from "./Topic";
 import { ArticleList } from "./ArticleList";
-// import ExampleImage from 'assests/images/0ab4f889-1444-419a-91e3-0c9002e0a5e6.png';
+import ExampleImage from './1.png';
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +106,7 @@ export const Home = () => {
           </span>
         </div>
       </div>
-      {/* <img src={ExampleImage} alt="Google Logo" /> */}
+      <img src={ExampleImage} alt="Google Logo" />
 
       <div className="flex w-[1100px] h-[1877.845px] flex-col gap-[10px] items-start flex-nowrap absolute top-[620px] left-[260px] z-[48]">
         {/* <div className="w-[1020px] shrink-0 bg-[url(public/images/565aa5cd-7256-430a-95ea-542860a82caf.png)] bg-cover bg-no-repeat relative z-[49]" />
