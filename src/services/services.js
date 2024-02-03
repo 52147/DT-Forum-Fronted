@@ -15,11 +15,10 @@ const generateResponse = async (requestData) => {
 };
 
 const getPostList = async () => {
-  const backendUrl = "http://localhost:5050";
+  const backendUrl = "http://localhost:8080";
   try {
     const response = await axios.get(
-      `${backendUrl}/get-post-list`,
-      requestData
+      `${backendUrl}/articles`
     );
     return response.data;
   } catch (error) {

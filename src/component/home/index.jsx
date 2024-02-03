@@ -187,7 +187,6 @@ export const Home = () => {
         {/* <div className="w-[272.922px] h-[272.922px] shrink-0 bg-[rgba(196,196,196,0.2)] bg-[url(/images/c8658b2d2b6167006f75b9b0819a2cd337d2c068.png)] bg-cover bg-no-repeat rounded-[5px] relative z-[82]" />
                     <img src="1.png" alt="Flowers in Chania"/> */}
 
-        <div className="w-[1020px] shrink-0 bg-[url(../../../public/images/268305b8-eaf2-4abd-82f3-feef2ebc6ebc.png)] bg-cover bg-no-repeat relative z-[85]" />
         {/* <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-[86]">
           <div className="flex w-[1140px] gap-[50px] items-center shrink-0 flex-nowrap relative z-[87]">
             <div className="flex w-[600px] flex-col gap-[5px] items-start shrink-0 flex-nowrap relative z-[88]">
