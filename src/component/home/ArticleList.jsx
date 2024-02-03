@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchPosts } from '../../redux/actions/postsActions.js';
 
 const articles = [
   {
@@ -16,9 +19,19 @@ const articles = [
 ];
 
 export const ArticleList = () => {
+  // In the ArticleList component
+const { posts, loading, error } = useSelector((state) => state.posts);
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchPosts());
+  // }, [dispatch]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <div className="flex flex-col gap-15px items-start shrink-0 relative z-86 w-[1140px]">
-      {articles.map((article) => (
+      {posts.map((article) => (
         <div
           key={article.id}
           className="flex flex-col shrink-0 relative z-87 mb-4"
