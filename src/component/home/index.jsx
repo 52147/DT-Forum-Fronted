@@ -3,7 +3,7 @@ import "./index.css";
 import { Slider } from "./Slider";
 import { Topic } from "./Topic";
 import { ArticleList } from "./ArticleList";
-import ExampleImage from './1.png';
+import ExampleImage from "./1.png";
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -188,7 +188,7 @@ export const Home = () => {
                     <img src="1.png" alt="Flowers in Chania"/> */}
 
         <div className="w-[1020px] shrink-0 bg-[url(../../../public/images/268305b8-eaf2-4abd-82f3-feef2ebc6ebc.png)] bg-cover bg-no-repeat relative z-[85]" />
-        <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-[86]">
+        {/* <div className="flex w-[1140px] flex-col gap-[15px] items-start shrink-0 flex-nowrap relative z-[86]">
           <div className="flex w-[1140px] gap-[50px] items-center shrink-0 flex-nowrap relative z-[87]">
             <div className="flex w-[600px] flex-col gap-[5px] items-start shrink-0 flex-nowrap relative z-[88]">
               <span className="h-[30px] self-stretch shrink-0 basis-auto font-['Barlow'] text-[20px] font-medium leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[89]">
@@ -245,7 +245,7 @@ export const Home = () => {
               </span>
             </button>
           </div>
-        </div>
+        </div> */}
 
         <ArticleList />
         {/* <div className="w-[1020px] shrink-0 bg-[url(public/images/43d8108a-e496-4483-930e-21dc708ce84c.png)] bg-cover bg-no-repeat relative z-[113]" />
@@ -659,7 +659,7 @@ export const Home = () => {
           </div>
         </div>
          */}
-        <div className="w-[1020px] shrink-0 bg-[url(public/images/97522f7d-bc18-4447-8223-d671cab53ed4.png)] bg-cover bg-no-repeat relative z-[317]" />
+        {/* <div className="w-[1020px] shrink-0 bg-[url(public/images/97522f7d-bc18-4447-8223-d671cab53ed4.png)] bg-cover bg-no-repeat relative z-[317]" />
         <div className="flex w-[118px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[318]">
           <div className="w-[24px] h-[24px] shrink-0 relative z-[319]">
             <div className="w-[16px] h-[8.207px] bg-[url(public/images/794e1dab-660f-4c8a-8f85-cbda66fc5387.png)] bg-[length:100%_100%] bg-no-repeat relative z-[320] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
@@ -667,7 +667,7 @@ export const Home = () => {
           <span className="h-[24px] shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] tracking-0.27px relative text-left whitespace-nowrap z-[321]">
             More posts
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
