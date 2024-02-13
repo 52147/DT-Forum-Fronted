@@ -60,3 +60,11 @@ button {
   /* Shown when isOpen is true */
   display: block; background-color: #f1f1f1;
 }
+
+
+.back-to-top-button {
+  position: relative;
+  z-index: 1000; /* Adjust z-index to be higher than other page elements */
+  cursor: pointer;
+  /* other styling */
+}
