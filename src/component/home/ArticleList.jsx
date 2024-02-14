@@ -118,17 +118,7 @@ export const ArticleList = () => {
           Most liked
         </button>
 
-        <div className="flex w-[316px] pt-1.5 pr-3.25 pb-1.5 pl-3.25 gap-2.5 items-center rounded-md border border-black relative">
-          <div className="w-6 h-6 relative flex-shrink-0">
-            <div className="w-3.5 h-3.5 bg-[url('/public/images/92fe01d7-045c-4214-a8f6-c4734d5a6025.png')] bg-cover bg-no-repeat relative mt-1.25 ml-1.25"></div>
-          </div>
-          <input
-            type="text"
-            placeholder="Search all discussions"
-            className="bg-transparent border-none placeholder-gray-400 text-base font-light leading-6 text-gray-400 w-full focus:outline-none"
-            aria-label="Search"
-          />
-        </div>
+        
 
         <div className="relative inline-block text-left">
           <button
@@ -145,8 +135,8 @@ export const ArticleList = () => {
           {/* Conditionally render dropdown content based on isOpen state */}
           {isOpen && (
             <div
-              className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu"
+            className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" // Changed w-56 to w-40 for a narrower container
+            role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
               tabIndex="-1"
@@ -166,6 +156,18 @@ export const ArticleList = () => {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="flex w-[316px] pt-1.5 pr-3.25 pb-1.5 pl-3.25 gap-2.5 items-center rounded-md border border-black relative">
+          <div className="w-6 h-6 relative flex-shrink-0 pl-4 pr-8">
+            <div className=" w-3.5 h-3.5 bg-[url('/public/images/92fe01d7-045c-4214-a8f6-c4734d5a6025.png')] bg-cover bg-no-repeat relative mt-1.25 ml-1.25"></div>
+          </div>
+          <input
+            type="text"
+            placeholder="Search all discussions"
+            className="bg-transparent border-none placeholder-gray-400 text-base font-light leading-6 text-gray-400 w-full focus:outline-none"
+            aria-label="Search"
+          />
         </div>
       </div>
 
