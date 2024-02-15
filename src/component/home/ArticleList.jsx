@@ -243,6 +243,7 @@ export const ArticleList = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

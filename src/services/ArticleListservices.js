@@ -17,9 +17,7 @@ const generateResponse = async (requestData) => {
 const getPostList = async () => {
   const backendUrl = "http://localhost:8080";
   try {
-    const response = await axios.get(
-      `${backendUrl}/articles`
-    );
+    const response = await axios.get(`${backendUrl}/articles`);
     return response.data;
   } catch (error) {
     console.error("Error in generating response:", error);

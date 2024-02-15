@@ -1,4 +1,4 @@
-import { getPostList } from '../../services/services'; 
+import { getPostList } from '../../services/ArticleListservices'; 
 
 // Action Types
 export const GET_POSTS_REQUEST = 'GET_POSTS_REQUEST';
