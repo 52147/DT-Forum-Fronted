@@ -12,7 +12,7 @@ export const PostComment = () => {
               <div className="flex w-[168px] gap-[24px] items-start shrink-0 flex-nowrap relative z-[337]">
                 <div className="w-[24px] h-[24px] shrink-0 bg-[url(public/images/9a42d08f-179d-469c-9933-f7f5d9c01f4f.png)] bg-cover bg-no-repeat relative overflow-hidden z-[338]" />
                 <div className="w-[24px] h-[24px] shrink-0 bg-[url(public/images/e07ffc58-b824-4396-9066-fde114347580.png)] bg-cover bg-no-repeat relative overflow-hidden z-[339]" />
-                <div className="w-[24px] h-[24px] shrink-0 bg-[url(public/images/9eec3b0e-240e-45fc-af53-bc02cca47348.png)] bg-cover bg-no-repeat relative overflow-hidden z-[340]" />
+                <div className="w-[24px] h-[24px] s∂hrink-0 bg-[url(public/images/9eec3b0e-240e-45fc-af53-bc02cca47348.png)] bg-cover bg-no-repeat relative overflow-hidden z-[340]" />
                 <div className="w-[24px] h-[24px] shrink-0 bg-[url(public/images/3905ccdf-a738-48da-a4fe-883134ffdfaf.png)] bg-cover bg-no-repeat relative overflow-hidden z-[341]" />
               </div>
               <div className="flex w-[168px] gap-[24px] items-start shrink-0 flex-nowrap relative z-[342]">
