@@ -71,7 +71,7 @@ export const PostContent = () => {
                     {content.author} | {content.title}
                   </span>
                   <span className="text-[18px]">
-                    {new Date(content.date).toLocaleDateString()}
+                    {content.date}
                   </span>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export const PostContent = () => {
           <Comment />
         </div>
         <div className="ml-12 mt-36">
-          <MoreIn />
+          <MoreIn postId = {postId} topic = {content.topic}/>
         </div>
       </div>
     </>
