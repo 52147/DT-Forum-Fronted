@@ -5,6 +5,7 @@ import { parseISO, differenceInCalendarDays } from "date-fns";
 import { useNavigate } from "react-router-dom"; 
 
 import { fetchPosts } from "../../redux/actions/postsActions.js";
+const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia"];
 
 const articles = [
   {
@@ -22,7 +23,11 @@ const articles = [
 
 export const ArticleList = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [selectedCity, setSelectedCity] = useState(''); // To store the selected city
+  const handleCityChange = (city) => {
+    setSelectedCity(city);
+    setIsOpen(false); // Close dropdown after selection
+  };
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -121,41 +126,30 @@ export const ArticleList = () => {
         
 
         <div className="relative inline-block text-left">
-          <button
-            onClick={toggleDropdown}
-            className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-            id="menu-button"
-            aria-expanded={isOpen}
-            aria-haspopup="true"
-          >
-            Location
-            <div className="w-[16px] h-[8.207px] bg-[url(public/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-          </button>
+        <button onClick={toggleDropdown} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+          {selectedCity || "Select a City"} {/* Display selected city or prompt */}
+          {/* Icon and other elements */}
+          <div className="w-[16px] h-[8.207px] bg-[url(public/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
+        </button>
 
-          {/* Conditionally render dropdown content based on isOpen state */}
-          {isOpen && (
-            <div
-            className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" // Changed w-56 to w-40 for a narrower container
+        {isOpen && (
+          <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabIndex="-1"
-            >
-              {/* Dropdown items */}
-              <div className="py-1" role="none">
-                <a
-                  href="#"
-                  className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
-                  role="menuitem"
-                  tabIndex="-1"
-                  id="menu-item-0"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabIndex="-1">
+            <div className="py-1" role="none">
+              {cities.map((city, index) => (
+                <a key={index} href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                  role="menuitem" tabIndex="-1" id={`menu-item-${index}`}
+                  onClick={() => handleCityChange(city)} // Set selected city on click
                 >
-                  Option 1
+                  {city}
                 </a>
-                {/* ... other options */}
-              </div>
+              ))}
             </div>
-          )}
+          </div>
+        )}
         </div>
 
         <div className="flex w-[316px] pt-1.5 pr-3.25 pb-1.5 pl-3.25 gap-2.5 items-center rounded-md border border-black relative">

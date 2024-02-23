@@ -32,7 +32,10 @@ export const MoreIn = ({ postId, topic }) => {
                 </div>
                 <div className="flex w-[118px] items-center shrink-0 flex-nowrap relative z-[166]">
                   <span className="h-[25px] shrink-0 basis-auto font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-left whitespace-nowrap z-[167]">
-                    {post.author} | {post.date}
+                    {post.author.length > 6
+                      ? post.author.substring(0, 6)
+                      : post.author}
+                    | {post.date}
                   </span>
                 </div>
               </div>
