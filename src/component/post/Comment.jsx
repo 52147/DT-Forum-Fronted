@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchComment } from "../../redux/actions/commentActions";
 
 export const Comment = ({ postId }) => {
   const dispatch = useDispatch();
   const { loading, comments, error } = useSelector((state) => state.comments);
+  const [expandedComments, setExpandedComments] = useState({});
 
   useEffect(() => {
     if (postId) {
@@ -12,70 +13,63 @@ export const Comment = ({ postId }) => {
     }
   }, [postId, dispatch]);
 
-  const renderComments = (comments, depth = 0) => {
-    // Flatten any depth beyond the second level (third level comments) to the second level.
-    const currentDepth = Math.min(depth, 2);
-    let nestedWidth;
-    if (currentDepth == 1) {
-      nestedWidth = "950px";
-    } else if (currentDepth == 2) {
-      nestedWidth = "900px";
-    } else {
-      nestedWidth = "1000px";
-    }
-    let nestedWidth2;
-    if (currentDepth == 1) {
-      nestedWidth2 = "850px";
-    } else if (currentDepth == 2) {
-      nestedWidth2 = "800px";
-    } else {
-      nestedWidth2 = "900px";
-    }
-    let nestedMarginRight;
-    if (currentDepth == 1) {
-      nestedMarginRight = "50px";
-    } else if (currentDepth == 2) {
-      nestedMarginRight = "80px";
-    } else {
-      nestedMarginRight = "0px";
-    }
+  const toggleCommentsVisibility = (commentId) => {
+    setExpandedComments((prev) => ({
+      ...prev,
+      [commentId]: !prev[commentId],
+    }));
+  };
 
+  const renderComments = (comments, depth = 0, parentId = null) => {
     return comments.map((comment) => (
       <div
         key={comment.id}
-        className={`flex w-[960px] flex-col gap-[10px] items-start flex-nowrap relative z-[52] ml-${
-          currentDepth * 20
-        } mt-2 p-4 rounded-lg `}
-        style={{ width: nestedWidth }}
+        className={`flex flex-col gap-2 p-4 rounded-lg ${
+          depth > 0 ? "ml-" + depth * 5 : "ml-0"
+        } bg-white`}
+        style={{
+          borderLeft: depth > 0 ? `${depth * 2}px solid #cbd5e1` : "none",
+        }}
       >
-        <div className="w-[960px] h-[197px] shrink-0 relative z-[53]">
-          <div className="flex w-[223px] gap-[12px] items-center flex-nowrap relative z-[54]">
-            <div className="w-[40px] h-[40px] shrink-0 relative z-[55]">
-              {/* Assuming avatar URL or style logic is applied here */}
-              <div className="w-[40px] h-[39.57px] bg-[url(public/images/d6d06903-56cf-48ac-9153-8c0cdb56fbf7.png)] bg-cover bg-no-repeat relative z-[57]" />
-              <div className="w-full h-full bg-[#c4c4c4] rounded-[10px] absolute top-0 left-0 z-[56]"></div>
+        <div className="flex justify-between items-start w-full">
+          <div className="flex-1">
+            {/* Assuming avatar URL or style logic is applied here */}
+            <div className="flex items-center gap-4">
+              <div className="w-[40px] h-[40px] shrink-0 relative z-[55]">
+                {/* Assuming avatar URL or style logic is applied here */}
+                <div className="w-[40px] h-[39.57px] bg-[url(public/images/d6d06903-56cf-48ac-9153-8c0cdb56fbf7.png)] bg-cover bg-no-repeat relative z-[57]" />
+                <div className="w-full h-full bg-[#c4c4c4] rounded-[10px] absolute top-0 left-0 z-[56]"></div>
+              </div>{" "}
+              <div>
+                <strong className="mr-2">{comment.author}</strong>
+                <span className="text-gray-500"> |</span>
+                <span className="text-gray-500 ml-4">
+                  {comment.timestamp.split("T")[0]}
+                </span>
+              </div>
             </div>
-            <div className="flex w-[171px] items-center shrink-0 flex-nowrap relative z-[58]">
-              <span className="h-[30px] shrink-0 basis-auto font-['Barlow'] text-[20px] font-medium leading-[30px] text-[#000] relative text-left whitespace-nowrap z-[59]">
-                {comment.author}
-              </span>
-              <span
-                className="text-gray-500 ml-4"
-                style={{ minWidth: "200px", maxWidth: "300px" }}
-              >
-                {comment.timestamp}
-              </span>
+            <div className="mt-2 ml-8 flex w-[916px] pt-[10px] pr-[10px] pb-[10px] pl-[10px] gap-[10px] items-start shrink-0 flex-nowrap bg-[rgba(220,228,244,0.5)] rounded-[10px] relative z-[62] ">
+              <p className="text-gray-800">{comment.content}</p>
             </div>
           </div>
-          <div className="flex w-[916px] flex-col gap-[6px] items-end flex-nowrap relative z-[61] mt-[6px]">
-            <div
-              className="flex w-[916px] pt-[10px] pr-[10px] pb-[10px] pl-[10px] gap-[10px] items-start shrink-0 flex-nowrap bg-[rgba(220,228,244,0.5)] rounded-[10px] relative z-[62] "
-              style={{ width: nestedWidth2, marginRight: nestedMarginRight }}
-            >
-              <span className="flex w-[898px] h-[100px] justify-start items-center shrink-0 font-['Barlow'] text-[16px] font-light leading-[25px] text-[#000] relative text-left z-[63]">
-                {comment.content}
-              </span>
+          {/* Placeholder for icons and actions */}
+        </div>
+        <div className="flex ml-auto gap-[20px] items-center">
+          <div className="flex gap-[2px] items-center">
+            <div className="w-[24px] h-[24px]">
+              <div
+                className="w-[14px] h-[14px] bg-[length:100%_100%] bg-no-repeat"
+                style={{
+                  backgroundImage:
+                    "url(public/images/84a56358-fb4b-4669-9aca-da5a00ad9142.png)",
+                }}
+              ></div>
             </div>
+            <button className="text-[#000] underline">Comment</button>
+          </div>
+          <div className="flex gap-[5px] items-start">
+            {/* Other action icons */}
+            {/* Icons here */}
             {/* Placeholder for icons and actions */}
             <div className="flex w-[225px] gap-[20px] items-center shrink-0 flex-nowrap relative z-[64]">
               <div className="flex w-[94px] gap-[2px] items-center shrink-0 flex-nowrap relative z-[65] ">
@@ -103,14 +97,17 @@ export const Comment = ({ postId }) => {
             </div>
           </div>
         </div>
-
-        {/* Render replies if they exist, capping the depth at the third level */}
-        {comment.replies && (
-          <div className="mt-4 ">
-            {renderComments(
-              comment.replies,
-              currentDepth + (currentDepth < 2 ? 1 : 0)
-            )}
+        {comment.replies && comment.replies.length > 0 && depth < 2 && (
+          <button
+            onClick={() => toggleCommentsVisibility(comment.id)}
+            className="text-blue-500 hover:text-blue-700 underline mt-2"
+          >
+            {expandedComments[comment.id] ? "Hide Replies" : "Show Replies"}
+          </button>
+        )}
+        {comment.replies && expandedComments[comment.id] && (
+          <div className="mt-2">
+            {renderComments(comment.replies, depth + 1, comment.id)}
           </div>
         )}
       </div>

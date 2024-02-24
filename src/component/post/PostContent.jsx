@@ -22,6 +22,7 @@ export const PostContent = () => {
   }, [dispatch, postId]);
   // Update local state when global state changes
   useEffect(() => {
+    // To ensure the local state and the global state are the same
     if (content && content.likes_count !== likesCount) {
       setLikesCount(content.likes_count);
     }

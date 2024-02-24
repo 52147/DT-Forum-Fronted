@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { parseISO, differenceInCalendarDays } from "date-fns";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 import { fetchPosts } from "../../redux/actions/postsActions.js";
-const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia"];
+const cities = [
+  { value: "New York", label: "New York" },
+  { value: "Los Angeles", label: "Los Angeles" },
+  { value: "Chicago", label: "Chicago" },
+  { value: "Houston", label: "Houston" },
+  { value: "Phoenix", label: "Phoenix" },
+  { value: "Philadelphia", label: "Philadelphia" },
+];
 
 const articles = [
   {
@@ -20,21 +28,25 @@ const articles = [
     keywords: ["keyword1", "keyword2", "keyword5"],
   },
 ];
-
+const selectStyles = {
+  menu: (base) => ({
+    ...base,
+    zIndex: 100, // Ensure dropdown is above other content
+  }),
+};
 export const ArticleList = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(''); // To store the selected city
-  const handleCityChange = (city) => {
-    setSelectedCity(city);
-    setIsOpen(false); // Close dropdown after selection
-  };
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  // const [selectedCity, setSelectedCity] = useState(""); // To store the selected city
   const [activeFilter, setActiveFilter] = useState("Newest"); // Default filter
   const [searchQuery, setSearchQuery] = useState("");
   const { posts, loading, error } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [selectedCity, setSelectedCity] = useState(null);
+
+  const handleCityChange = (selectedOption) => {
+    setSelectedCity(selectedOption);
+  };
   useEffect(() => {
     dispatch(fetchPosts()); // Fetch 10 posts per page
   }, [dispatch]);
@@ -68,16 +80,22 @@ export const ArticleList = () => {
         });
 
       case "Most liked":
-        return filteredPosts; 
+        return filteredPosts;
 
       default:
         return filteredPosts;
     }
   };
 
-  const navigate = useNavigate(); 
   const navigateToPost = (authorName, name, postId) => {
     navigate(`/post/${authorName}/${name}/${postId}`);
+  };
+  // const handleCityChange = (city) => {
+  //   setSelectedCity(city);
+  //   setIsOpen(false); // Close dropdown after selection
+  // };
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -123,34 +141,12 @@ export const ArticleList = () => {
           Most liked
         </button>
 
-        
-
-        <div className="relative inline-block text-left">
-        <button onClick={toggleDropdown} className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-          {selectedCity || "Select a City"} {/* Display selected city or prompt */}
-          {/* Icon and other elements */}
-          <div className="w-[16px] h-[8.207px] bg-[url(public/images/dbf7bf16-39ee-4763-8472-16e9fc870493.png)] bg-[length:100%_100%] bg-no-repeat relative z-[336] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-        </button>
-
-        {isOpen && (
-          <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-            tabIndex="-1">
-            <div className="py-1" role="none">
-              {cities.map((city, index) => (
-                <a key={index} href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
-                  role="menuitem" tabIndex="-1" id={`menu-item-${index}`}
-                  onClick={() => handleCityChange(city)} // Set selected city on click
-                >
-                  {city}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-        </div>
+        <Select
+          value={selectedCity}
+          onChange={handleCityChange}
+          options={cities}
+          styles={selectStyles}
+        />
 
         <div className="flex w-[316px] pt-1.5 pr-3.25 pb-1.5 pl-3.25 gap-2.5 items-center rounded-md border border-black relative">
           <div className="w-6 h-6 relative flex-shrink-0 pl-4 pr-8">
@@ -237,7 +233,6 @@ export const ArticleList = () => {
           </div>
         ))}
       </div>
-      
     </div>
   );
 };
