@@ -34,6 +34,10 @@ const articles = [
   },
 ];
 const selectStyles = {
+  control: (base) => ({
+    ...base,
+    width: 150, // Set the width of the select control
+  }),
   menu: (base) => ({
     ...base,
     zIndex: 100, // Ensure dropdown is above other content
