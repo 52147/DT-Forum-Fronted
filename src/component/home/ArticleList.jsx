@@ -13,6 +13,11 @@ const cities = [
   { value: "Houston", label: "Houston" },
   { value: "Phoenix", label: "Phoenix" },
   { value: "Philadelphia", label: "Philadelphia" },
+  { value: "Boston", label: "Boston" },
+  { value: "San Jose", label: "San Jose" },
+  { value: "Austin", label: "Austin" },
+  { value: "Dallas", label: "Dallas" },
+  { value: "Phoenix", label: "Phoenix" },
 ];
 
 const articles = [
@@ -35,7 +40,6 @@ const selectStyles = {
   }),
 };
 export const ArticleList = () => {
-  const [isOpen, setIsOpen] = useState(false);
   // const [selectedCity, setSelectedCity] = useState(""); // To store the selected city
   const [activeFilter, setActiveFilter] = useState("Newest"); // Default filter
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,6 +47,23 @@ export const ArticleList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedCity, setSelectedCity] = useState(null);
+  const postsPerPage = 10; // Display 10 posts per page initially
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  // State to keep track of all displayed posts
+  const [displayedPosts, setDisplayedPosts] = useState([]);
+  // State to keep track of the number of posts to display
+  const [numDisplayedPosts, setNumDisplayedPosts] = useState(postsPerPage);
+
+  // Function to load more posts
+  const loadMorePosts = () => {
+    // Increase the number of displayed posts by the posts per page
+    setNumDisplayedPosts((prevNum) => prevNum + postsPerPage);
+  };
 
   const handleCityChange = (selectedOption) => {
     setSelectedCity(selectedOption);
@@ -58,44 +79,73 @@ export const ArticleList = () => {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+  // Effect that runs when selectedCity changes
+  useEffect(() => {
+    if (selectedCity) {
+      // Perform an action when selectedCity changes, such as fetching data
+      console.log(`Selected city: ${selectedCity.label}`);
+      const allFilteredAndSortedPosts = filteredAndSortedPosts();
+      // Update the displayed posts based on the number of posts to display
+      setDisplayedPosts(allFilteredAndSortedPosts.slice(0, numDisplayedPosts)); // Example: fetchDataForCity(selectedCity.value);
+    }
+  }, [selectedCity]); // Dependency array includes selectedCity to run effect on its change
 
   const filteredAndSortedPosts = () => {
-    const filteredPosts = posts.filter(
+    // First, filter the posts based on the search query
+    let filteredPosts = posts.filter(
       (post) =>
-        post.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.preview.toLowerCase().includes(searchQuery.toLowerCase())
+        (post.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.preview.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        (!selectedCity || post.location === selectedCity.value) // Assuming each post has a 'city' property
     );
+    console.log(filteredPosts);
 
+    // Then, sort the filtered posts based on the active filter
     switch (activeFilter) {
       case "Trending":
         const currentDate = new Date();
-        return filteredPosts.sort((a, b) => {
+        filteredPosts.sort((a, b) => {
           const daysA = differenceInCalendarDays(currentDate, parseISO(a.date));
           const scoreA = daysA / parseInt(a.messageCounts, 10);
 
           const daysB = differenceInCalendarDays(currentDate, parseISO(b.date));
           const scoreB = daysB / parseInt(b.messageCounts, 10);
 
+          // For trending, you might want to sort from lowest score to highest,
+          // assuming a lower score means more trending. Adjust as needed.
           return scoreA - scoreB;
         });
+        break;
 
       case "Most liked":
-        return filteredPosts;
+        // Assuming you have a sorting logic for "Most liked"
+        // For example, if posts had a 'likes' property you could sort like this:
+        filteredPosts.sort((a, b) => b.likes_count - a.likes_count);
+        break;
 
+      // Add more cases as needed
+      case "Newest":
+        // Assuming you have a sorting logic for "Most liked"
+        // For example, if posts had a 'likes' property you could sort like this:
+        filteredPosts.sort((a, b) => parseISO(b.date) - parseISO(a.date));
+        break;
       default:
-        return filteredPosts;
+        // Assuming the default is "Newest", you might sort by date
+        // For example:
+        break;
     }
+
+    return filteredPosts;
   };
+  // Effect or a function to update displayed posts when needed
+  useEffect(() => {
+    const allFilteredAndSortedPosts = filteredAndSortedPosts();
+    // Update the displayed posts based on the number of posts to display
+    setDisplayedPosts(allFilteredAndSortedPosts.slice(0, numDisplayedPosts));
+  }, [posts, searchQuery, activeFilter, numDisplayedPosts]); // Make sure to include all dependencies that can affect the posts
 
   const navigateToPost = (authorName, name, postId) => {
     navigate(`/post/${authorName}/${name}/${postId}`);
-  };
-  // const handleCityChange = (city) => {
-  //   setSelectedCity(city);
-  //   setIsOpen(false); // Close dropdown after selection
-  // };
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
   };
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -162,7 +212,7 @@ export const ArticleList = () => {
       </div>
 
       <div className="flex flex-col gap-15px items-start shrink-0 relative z-86 w-[1140px]">
-        {filteredAndSortedPosts().map((article) => (
+        {displayedPosts.map((article) => (
           <div
             key={article.id}
             className="flex flex-col shrink-0 relative z-87 mb-4"
@@ -233,6 +283,33 @@ export const ArticleList = () => {
           </div>
         ))}
       </div>
+
+      {/* Load More button */}
+      <div className="flex w-[118px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[318]">
+        <div className="w-[24px] h-[24px] shrink-0 relative z-[319]">
+          <div className="w-[16px] h-[8.207px] bg-[url(public/images/794e1dab-660f-4c8a-8f85-cbda66fc5387.png)] bg-[length:100%_100%] bg-no-repeat relative z-[320] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
+        </div>
+        <button
+          onClick={loadMorePosts}
+          className="h-[24px] shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] tracking-0.27px relative text-left whitespace-nowrap z-[321]"
+        >
+          More posts
+        </button>
+      </div>
+      <button
+        onClick={scrollToTop}
+        className=" flex w-[120px] gap-[5px] items-center flex-nowrap border-none relative z-[42] pointer mt-4 mx-auto"
+      >
+        {/* Icon container */}
+        <div className="w-[24px] h-[24px] shrink-0 relative z-[43]">
+          {/* Icon */}
+          <div className="w-[16px] h-[8.207px] bg-[url(public/images/9796a494-1d06-4722-988c-dd51a5795ed5.png)] bg-[length:100%_100%] bg-no-repeat relative z-[44] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
+        </div>
+        {/* Text */}
+        <span className="h-[24px] shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] tracking-0.27px relative text-left whitespace-nowrap z-[45]">
+          Back to top
+        </span>
+      </button>
     </div>
   );
 };

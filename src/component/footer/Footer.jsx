@@ -4,7 +4,10 @@ import "./index.css";
 export const Footer = () => {
   return (
     <>
-      <div className="main-container w-[1441px] h-[216px] bg-[#4c4c4d] relative mx-auto my-0">
+      <div
+        className="main-container w-[1441px] h-[216px] bg-[#4c4c4d] relative mx-auto my-0"
+        style={{ top: 111 }}
+      >
         <div className="flex w-[228px] flex-col gap-[10px] items-start flex-nowrap relative z-[3] mt-[60.5px] mr-0 mb-0 ml-[80px]">
           <div className="flex w-[125px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[4]">
             <div className="w-[24px] h-[24px] shrink-0 relative z-[5]">

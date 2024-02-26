@@ -21,12 +21,6 @@ export const Home = () => {
 
   console.log("Dropdown content should be:", isOpen ? "visible" : "hidden");
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
   return (
     <div className="main-container w-[1440px] h-[2867px] bg-[#fff] relative mx-auto my-0">
       <Slider />
@@ -108,29 +102,8 @@ export const Home = () => {
       <div className="flex w-[1100px] h-[1877.845px] flex-col gap-[10px] items-start flex-nowrap absolute top-[500px] left-[260px] z-[48]">
         <ArticleList />
         {/* Back to Top button placed after the ArticleList */}
-        <button
-          onClick={scrollToTop}
-          className="flex w-[120px] gap-[5px] items-center flex-nowrap border-none relative z-[42] pointer mt-4 mx-auto"
-        >
-          {/* Icon container */}
-          <div className="w-[24px] h-[24px] shrink-0 relative z-[43]">
-            {/* Icon */}
-            <div className="w-[16px] h-[8.207px] bg-[url(public/images/9796a494-1d06-4722-988c-dd51a5795ed5.png)] bg-[length:100%_100%] bg-no-repeat relative z-[44] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-          </div>
-          {/* Text */}
-          <span className="h-[24px] shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] tracking-0.27px relative text-left whitespace-nowrap z-[45]">
-            Back to top
-          </span>
-        </button>
+
         <div className="w-[1020px] shrink-0 bg-[url(public/images/97522f7d-bc18-4447-8223-d671cab53ed4.png)] bg-cover bg-no-repeat relative z-[317]" />
-        <div className="flex w-[118px] gap-[5px] items-center shrink-0 flex-nowrap relative z-[318]">
-          <div className="w-[24px] h-[24px] shrink-0 relative z-[319]">
-            <div className="w-[16px] h-[8.207px] bg-[url(public/images/794e1dab-660f-4c8a-8f85-cbda66fc5387.png)] bg-[length:100%_100%] bg-no-repeat relative z-[320] mt-[7.897px] mr-0 mb-0 ml-[4px]" />
-          </div>
-          <span className="h-[24px] shrink-0 basis-auto font-['Barlow'] text-[18px] font-normal leading-[24px] text-[#000] tracking-0.27px relative text-left whitespace-nowrap z-[321]">
-            More posts
-          </span>
-        </div>
       </div>
     </div>
   );
