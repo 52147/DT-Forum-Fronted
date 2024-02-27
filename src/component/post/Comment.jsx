@@ -6,7 +6,10 @@ export const Comment = ({ postId }) => {
   const dispatch = useDispatch();
   const { loading, comments, error } = useSelector((state) => state.comments);
   const [expandedComments, setExpandedComments] = useState({});
-
+  // Initial visibility based on storage
+  const [isVisible, setIsVisible] = useState(
+    localStorage.getItem("isModalVisible") === "true"
+  );
   useEffect(() => {
     if (postId) {
       dispatch(fetchComment(postId));
@@ -19,6 +22,8 @@ export const Comment = ({ postId }) => {
       [commentId]: !prev[commentId],
     }));
   };
+  const storedVisibility = localStorage.getItem("isModalVisible");
+  const isModalVisible = storedVisibility === "true";
 
   const renderComments = (comments, depth = 0, parentId = null) => {
     return comments.map((comment) => (
@@ -31,7 +36,10 @@ export const Comment = ({ postId }) => {
           borderLeft: depth > 0 ? `${depth * 2}px solid #cbd5e1` : "none",
         }}
       >
-        <div className="flex justify-between items-start w-full">
+        <div
+          className="flex justify-between items-start w-full "
+          // style={{ zIndex: isModalVisible ? -1 : 'auto',}}
+        >
           <div className="flex-1">
             {/* Assuming avatar URL or style logic is applied here */}
             <div className="flex items-center gap-4">
@@ -54,19 +62,10 @@ export const Comment = ({ postId }) => {
           </div>
           {/* Placeholder for icons and actions */}
         </div>
-        <div className="flex ml-auto gap-[20px] items-center">
-          <div className="flex gap-[2px] items-center">
-            <div className="w-[24px] h-[24px]">
-              <div
-                className="w-[14px] h-[14px] bg-[length:100%_100%] bg-no-repeat"
-                style={{
-                  backgroundImage:
-                    "url(public/images/84a56358-fb4b-4669-9aca-da5a00ad9142.png)",
-                }}
-              ></div>
-            </div>
-            <button className="text-[#000] underline">Comment</button>
-          </div>
+        <div
+          className="flex ml-auto gap-[20px] items-center"
+          //  style={{ zIndex: isModalVisible ? -1 : 'auto',}}
+        >
           <div className="flex gap-[5px] items-start">
             {/* Other action icons */}
             {/* Icons here */}
